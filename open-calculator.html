@@ -1,0 +1,26 @@
+<template>
+    <style>
+
+    </style>
+    <h1>Basic Web Component</h1>
+</template>
+<script>
+    (function() {
+        // This particular document holding the webcomponent.
+        var thisDoc = document.currentScript.ownerDocument;
+        // The Document calling or Using this Web Component
+        var thatDoc = document;
+
+        var tmpl = thisDoc.querySelector("template");
+        var Element = Object.create(HTMLElement.prototype);
+        var shadowRoot;
+
+        Element.createdCallback = function() {
+            shadowRoot = this.createShadowRoot();
+            var clone = thatDoc.importNode(tmpl.content, true);
+            shadowRoot.appendChild(clone);
+        }
+
+        thatDoc.registerElement('open-calculator', {prototype: Element});
+    })()
+</script>
