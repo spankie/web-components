@@ -3,6 +3,7 @@
 
     </style>
     <h1>Basic Web Component</h1>
+    <p id="message"></p>
 </template>
 <script>
     (function() {
@@ -19,6 +20,17 @@
             shadowRoot = this.createShadowRoot();
             var clone = thatDoc.importNode(tmpl.content, true);
             shadowRoot.appendChild(clone);
+
+            // components logic goes here
+            var messageElement = shadowRoot.querySelector("#message");
+            messageElement.innerHTML = "Hello new document. I'm a new Web Component.";
+
+            // Use events to send data to thatDoc
+            
+        }
+
+        Element.Log = function (text) {
+            console.log("Custom text: ", text);
         }
 
         thatDoc.registerElement('open-calculator', {prototype: Element});
